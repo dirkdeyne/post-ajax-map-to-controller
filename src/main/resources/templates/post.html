@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Post Map As Data</title>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js" ></script>
+</head>
+<body>
+    <h1>POST DATA AS MAP</h1>
+    <button id="doPost"> post </button>
+    <script>
+        $(function () {
+            var map = new Map();
+            map['CIQ_2'] = 'aa';
+            map['CIQ_3'] = '78965412300';
+
+            console.log(map);
+
+            $("#doPost").click (function() {
+                var settings = {
+                    beforeSend: function(xhr, options) {
+                        xhr.setRequestHeader("content-type" ,"application/json; charset=utf-8");
+                    },
+                    type: 'POST',
+                    url:  '/post' ,
+                    data: JSON.stringify(map)
+                }
+
+                $.ajax(settings).done(function(result) {
+                    console.log("done");
+                });
+            });
+
+        });
+
+    </script>
+</body>
+</html>
